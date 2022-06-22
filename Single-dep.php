@@ -2,17 +2,24 @@
 require_once __DIR__ . "/Database.php";
 require_once __DIR__ . "/Department.php";
 
-
 $id = $_GET["id"];
-$sql = "SELECT * FROM `departments` WHERE `id` = $id;";
-$risultato = $connessione->query($sql);
+$stmt = $connessione->prepare("SELECT * FROM `departments` WHERE `id` = ?");
+$stmt->bind_param("d", $id);
+$stmt->execute();
+$risultato = $stmt->get_result();
+
+
+
+// $id = $_GET["id"];
+// $sql = "SELECT * FROM `departments` WHERE `id` = $id;";
+// $risultato = $connessione->query($sql);
 
 $departments = [];
 
 if ($risultato && $risultato->num_rows > 0) {
     while ($row = $risultato->fetch_assoc()) {
         $selected_department = new Department($row["id"], $row["name"]);
-        $selected_department->stampaInformazioni($row["adress"], $row["phone"], $row["email"], $row["website"], $row["head_of_dep"],);
+        $selected_department->stampaInformazioni($row["address"], $row["phone"], $row["email"], $row["website"], $row["head_of_department"],);
         $departments[] = $selected_department;
     }
 } elseif ($risultato) {

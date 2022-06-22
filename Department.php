@@ -7,7 +7,7 @@ class Department
     public $phone;
     public $email;
     public $website;
-    public $head_of_dep;
+    public $head_of_department;
 
 
     function __construct($_id, $_name)
@@ -16,13 +16,13 @@ class Department
         $this->name = $_name;
     }
 
-    public function stampaInformazioni($_adress, $_phone, $_email, $_website, $_head_of_dep)
+    public function stampaInformazioni($_adress, $_phone, $_email, $_website, $_head_of_department)
     {
         $this->adress = $_adress;
         $this->phone = $_phone;
         $this->email = $_email;
         $this->website = $_website;
-        $this->head_of_dep = $_head_of_dep;
+        $this->head_of_dep = $_head_of_department;
     }
 
     public function stampaContatti()
